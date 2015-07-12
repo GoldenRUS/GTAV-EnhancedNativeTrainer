@@ -63,6 +63,7 @@ ENTDatabase* database = NULL;
 //std::mutex db_mutex;
 
 // features
+bool OnConnect							=	true;
 bool featurePlayerInvincible			=	false;
 bool featurePlayerInvincibleUpdated		=	false;
 bool featurePlayerNeverWanted			=	false;
@@ -1148,11 +1149,26 @@ void main()
 			menu_beep();
 			process_airbrake_menu();
 		}
-
+		
+		if(OnConnect)
+		{
+		//On Connect
+		WAIT(100);
+		PlayerOnConnect(); //PlayerOnConnect call
+		
+		OnConnect=false;
+		}
+		
 		update_features();
 
 		WAIT(0);
 	}
+}
+
+void PlayerOnConnect()
+//This function is called when player connected
+{
+
 }
 
 void make_minidump(EXCEPTION_POINTERS* e)
